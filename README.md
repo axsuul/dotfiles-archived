@@ -1,5 +1,5 @@
-# About
-These dotfiles allow me to have a consistent setup on different machines/environments.
+# Description
+These are my `.files`, files that I put in my home directory on UNIX systems which then multiply my productivity by over nine thousand!
 
 # Requirements
 * [vundle](https://github.com/gmarik/vundle) for `vim` to install the plugins
@@ -9,5 +9,5 @@ Install vim plugins
 
     vim +BundleInstall +qall
 
-# TODO
-* Create a chef cookbook to assist in installing these dotfiles along with any dependencies like `vundle` for `vim` to server environments.
+# Chef
+There's a cookbook that exists in getting these dotfiles to the right mouths. [It's right here if you have the appetite for it.](https://github.com/axsuul/cookbook-dotfiles)

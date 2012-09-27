@@ -1,0 +1,19 @@
+# Starts ssh-agent if one isn't running, or connects to an already running
+# agent!
+
+# Checks to see if a SSH agent is running
+check_ssh_agent() {
+    [ -S "$SSH_AUTH_SOCK" ] && { ssh-add -l >& /dev/null || [ $? -ne 2 ]; }
+}
+
+# Create file path that we will be storing data in if doesn't exist
+mkdir -p ~/.tmp
+touch ~/.tmp/ssh-agent.env
+
+# Attempt to connect to a running agent. If the agent's data
+# is invalid, start a new one
+check_ssh_agent || export SSH_AUTH_SOCK="$(< ~/.tmp/ssh-agent.env)"
+check_ssh_agent || {
+    eval "$(ssh-agent -s)" > /dev/null
+    echo "$SSH_AUTH_SOCK" > ~/.tmp/ssh-agent.env
+}

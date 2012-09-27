@@ -1,0 +1,15 @@
+# Directory navigation
+alias ..="cd .."
+alias ...="cd ../.."
+alias ....="cd ../../.."
+alias ~="cd ~"
+
+# Chef
+alias lc="librarian-chef"
+
+# Vagrant
+alias vu="vagrant up"
+alias vp="vagrant provision"
+alias vr="vagrant reload"
+alias vh="vagrant halt"
+alias vd="vagrant destroy"
