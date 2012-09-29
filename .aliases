@@ -4,6 +4,9 @@ alias ...="cd ../.."
 alias ....="cd ../../.."
 alias ~="cd ~"
 
+# Logs
+alias tf="tail -f"
+
 # Chef
 alias lc="librarian-chef"
 
