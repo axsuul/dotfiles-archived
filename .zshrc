@@ -22,9 +22,6 @@ export DISABLE_AUTO_TITLE="true"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(git bundler)
 
-# Disable the annoying autocorrect feature
-unsetopt correct_all
-
 # Make git prompt more performant
 function git_prompt_info() {
   ref=$(git symbolic-ref HEAD 2> /dev/null) || return
@@ -32,6 +29,10 @@ function git_prompt_info() {
 }
 
 source $ZSH/oh-my-zsh.sh
+
+# Disable the annoying autocorrect feature
+# Must come after sourcing oh-my-zsh.sh
+unsetopt correct_all
 
 # Customize to your needs...
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/racket/bin:$PATH
