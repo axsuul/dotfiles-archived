@@ -1,6 +1,7 @@
 # Load things
+for f in "$HOME"/.initializers/*; do source $f; done
+
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
-[[ -f "$HOME/.initializers" ]] && source "$HOME/.initializers"
 [[ -f "$HOME/.functions" ]] && source "$HOME/.functions"
 
 # Include our scripts into $PATH
