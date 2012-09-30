@@ -8,7 +8,7 @@ These are my `.files`, files that I put in my home directory on UNIX systems whi
 - [vundle](https://github.com/gmarik/vundle) for `vim` to install the plugins
 
 # Installation
-I recommend [homesick](https://github.com/technicalpickles/homesick) to install these dotfiles. Unfortunately, it introduces a ruby dependency but honestly how can you live without it? Thankfully it works on `1.8.7` so you can still be an old tard.
+Use [homesick](https://github.com/technicalpickles/homesick) to install these dotfiles. Unfortunately, it introduces a ruby dependency but honestly how can you live without it? Thankfully it works on `1.8.7` so you can still be an old tard.
 
     $ gem install homesick
     $ homesick clone axsuul/dotfiles
