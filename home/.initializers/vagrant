@@ -1,0 +1,4 @@
+# If we are in a vagrant VM, start off in /vagrant
+if [ -d "/vagrant" ]; then
+  cd /vagrant
+fi
