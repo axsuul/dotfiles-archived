@@ -1,4 +1,8 @@
-# If we are in a vagrant VM, start off in /vagrant
+# If we are in a vagrant VM
 if [ -d "/vagrant" ]; then
+  # Start off in /vagrant
   cd /vagrant
+
+  # Tell spring gem where we want to put socket file
+  export SPRING_TMP_PATH=/tmp
 fi
