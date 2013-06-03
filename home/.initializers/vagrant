@@ -3,6 +3,6 @@ if [ -d "/vagrant" ]; then
   # Start off in /vagrant
   cd /vagrant
 
-  # Tell spring gem where we want to put socket file
-  export SPRING_TMP_PATH=/tmp
+  # Shared folders don't allow socket files
+  export ZEUSSOCK=/tmp/zeus.sock
 fi
