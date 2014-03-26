@@ -9,6 +9,3 @@ for f in "$HOME"/.initializers/*; do source $f; done
 
 # Settings
 export EDITOR=vim
-
-# Adapt path for vagrant development environment
-export PATH=/vagrant/bin:$PATH
