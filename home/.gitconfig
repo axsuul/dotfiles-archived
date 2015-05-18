@@ -1,7 +1,7 @@
 [user]
-	name = James Hu
-	email = hello@james.hu
+       name = James Hu
+       email = hello@james.hu
 [github]
-	user = axsuul
-[push] 
-  	default = simple
+       user = axsuul
+[push]
+       default = simple
