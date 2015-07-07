@@ -1,5 +1,13 @@
-# Load in rbenv if we have it
-if [ -d "$HOME/.rbenv/bin" ]; then export PATH="$HOME/.rbenv/bin":$PATH; fi
-if [ -d "/usr/local/rbenv/bin" ]; then export PATH=/usr/local/rbenv/bin:$PATH; fi
+# Prefer rbenv user install over system
+if [ -s "${HOME}/.rbenv/bin" ]; then
+  rbenv_root="${HOME}/.rbenv"
+elif [ -s "/usr/local/rbenv" ]; then
+  rbenv_root="/usr/local/rbenv"
+  export RBENV_ROOT="$rbenv_root"
+fi
 
-if which rbenv > /dev/null; then eval "$(rbenv init -)"; fi
+# Load in rbenv if we have it
+if [ -n "$rbenv_root" ]; then
+  export PATH="${rbenv_root}/bin:$PATH"
+  eval "$(rbenv init -)"
+fi
