@@ -1,8 +1,11 @@
 # If we are in a vagrant VM
 if [ -d "/vagrant" ]; then
-  # Start off in /vagrant
-  cd /vagrant
-
+  # Add bin/ folder to PATH
+  export PATH=/vagrant/bin:$PATH
+  
   # Shared folders don't allow socket files
   export ZEUSSOCK=/tmp/zeus.sock
+  
+  # Start off in /vagrant
+  cd /vagrant
 fi
