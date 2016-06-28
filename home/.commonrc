@@ -1,7 +1,12 @@
 # Load things
 for f in "$HOME"/.initializers/*; do source $f; done
 
-[[ -f "$HOME/.env" ]] && source "$HOME/.env"
+# Export a key/value .env file by adding an export in front
+# of each line and then sourcing the entire file
+if [[ -f "$HOME/.env" ]]; then
+  . <(sed '/^export/!s/^/export /' "$HOME/.env")
+fi
+
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 [[ -f "$HOME/.functions" ]] && source "$HOME/.functions"
 
