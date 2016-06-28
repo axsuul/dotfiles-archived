@@ -1,6 +1,7 @@
 # Load things
 for f in "$HOME"/.initializers/*; do source $f; done
 
+[[ -f "$HOME/.env" ]] && source "$HOME/.env"
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 [[ -f "$HOME/.functions" ]] && source "$HOME/.functions"
 
