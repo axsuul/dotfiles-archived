@@ -6,6 +6,7 @@ Gotta have my dotfiles! Plays nicely with:
 - tmux
 - oh-my-zsh
 - rbenv
+- direnv
 
 # Installation
 Use [homesick](https://github.com/technicalpickles/homesick) to install these dotfiles. Yes, it requires [Ruby](http://ruby-lang.org)! Thankfully it works on `1.8.7` so you can still be an old tard.
