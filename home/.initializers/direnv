@@ -1,13 +1,14 @@
-# Initialize direnv depending on which shell we are in
+# Initialize direnv if it exists
+if type direnv > /dev/null 2>&1; then
+  # Disable messages
+  export DIRENV_LOG_FORMAT=
 
-# Disable messages
-export DIRENV_LOG_FORMAT=
+  # If running zsh
+  if [ -n "$ZSH_VERSION" ]; then
+  	eval "$(direnv hook zsh)"
 
-# If running zsh
-if [ -n "$ZSH_VERSION" ]; then
-	eval "$(direnv hook zsh)"
-
-# If running bash
-elif [ -n "$BASH_VERSION" ]; then
-	eval "$(direnv hook bash)"
+  # If running bash
+  elif [ -n "$BASH_VERSION" ]; then
+  	eval "$(direnv hook bash)"
+  fi
 fi
