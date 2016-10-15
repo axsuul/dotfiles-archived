@@ -13,3 +13,5 @@
 	excludesfile = /Users/axsuul/.gitignore_global
 [commit]
 	template = /Users/axsuul/.stCommitMsg
+[push]
+	default = simple
