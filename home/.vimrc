@@ -4,12 +4,26 @@ filetype off		" Required
 " Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
+
+" Core plugins
 Plugin 'VundleVim/Vundle.vim'	" This needs to be first
 Plugin 'altercation/vim-colors-solarized'
+Plugin 'ctrlpvim/ctrlp.vim'
+
+" Main plugins
+Plugin 'tpope/vim-fugitive'	" Git wrapper
+
+" Language plugins
+Plugin 'tpope/vim-rails'
+Plugin 'pangloss/vim-javascript'
+Plugin 'mattn/emmet-vim'
+
 Plugin 'scrooloose/nerdtree'
 
 call vundle#end()            	" Finish plugins
 filetype plugin indent on	" Don't ignore plugin indent changes
+
+set clipboard=unnamed
 
 " Display
 set title
@@ -22,7 +36,7 @@ set scrolloff=3		" Display at least 3 lines around cursor
 set hidden		" Hide buffer (file) instead of abandoning when switching to another buffer
 set guifont=Monaco:h13
 set antialias
-set guioptions=T 	" Enable toolbar 
+set guioptions-=T 	" Disable toolbar 
 
 " Search
 set ignorecase		" Ignore case when searching
@@ -41,3 +55,13 @@ set backspace=indent,eol,start	" Backspace behaves as expected
 syntax enable
 set background=dark
 colorscheme solarized
+
+" Windows
+map <C-J> <C-W>j
+map <C-K> <C-W>k
+map <C-L> <C-W>l
+map <C-H> <C-W>h
+
+" .vimrc shortcut
+nnoremap <leader>v :e  ~/.vimrc<CR>
+nnoremap <leader>V :tabnew  ~/.vimrc<CR>
