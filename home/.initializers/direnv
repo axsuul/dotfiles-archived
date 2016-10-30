@@ -5,15 +5,15 @@ if type direnv > /dev/null 2>&1; then
 
   # If running zsh
   if [ -n "$ZSH_VERSION" ]; then
-  	eval "$(direnv hook zsh)"
+    eval "$(direnv hook zsh)"
 
   # If running bash
   elif [ -n "$BASH_VERSION" ]; then
-  	eval "$(direnv hook bash)"
+    eval "$(direnv hook bash)"
   fi
 
   # Alias tmux to be direnv-aware
   if type direnv > /dev/null 2>&1; then
-  	alias tmux='direnv exec / tmux'
+    alias tmux='direnv exec / tmux'
   fi
 fi
