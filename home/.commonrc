@@ -13,5 +13,6 @@ fi
 # Include our scripts into $PATH
 [[ -d "$HOME/.scripts" ]] && export PATH=$HOME/.scripts:$PATH
 
-# Settings
-export EDITOR=vim
+# Use neovim as default editor 
+export VISUAL=nvim
+export EDITOR="$VISUAL"

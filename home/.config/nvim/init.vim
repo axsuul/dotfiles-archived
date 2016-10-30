@@ -11,7 +11,9 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'ctrlpvim/ctrlp.vim'
 
 " Main plugins
+Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-fugitive'	" Git wrapper
+Plugin 'sjl/vitality.vim'	" Play nicely with iTerm2 + tmux
 
 " Language plugins
 Plugin 'tpope/vim-rails'
@@ -36,7 +38,6 @@ set scrolloff=3		" Display at least 3 lines around cursor
 " Visual 
 set hidden		" Hide buffer (file) instead of abandoning when switching to another buffer
 set guifont=Monaco:h13
-set antialias
 set guioptions-=T 	" Disable toolbar 
 
 " Search
@@ -63,6 +64,11 @@ map <C-K> <C-W>k
 map <C-L> <C-W>l
 map <C-H> <C-W>h
 
-" Config 
-nnoremap <leader>v :e  ~/.vimrc<CR>
-nnoremap <leader>V :tabnew  ~/.vimrc<CR>
+" Quickload config 
+nnoremap <leader>v :e  ~/.config/nvim/init.vim<CR>
+nnoremap <leader>V :tabnew  ~/.config/nvim/init.vim<CR>
+
+" Change cursor shape and highlight line in insert mode 
+let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1	" Support cursor change in neovim via vitality plugin
+:autocmd InsertEnter * set cul
+:autocmd InsertLeave * set nocul

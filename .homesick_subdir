@@ -1,3 +1,4 @@
 .initializers
 .homesick/repos/dotfiles/home/.vim
 .homesick/repos/dotfiles/home/.initializers
+.config/nvim
