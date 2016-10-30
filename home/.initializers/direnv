@@ -11,4 +11,9 @@ if type direnv > /dev/null 2>&1; then
   elif [ -n "$BASH_VERSION" ]; then
   	eval "$(direnv hook bash)"
   fi
+
+  # Alias tmux to be direnv-aware
+  if type direnv > /dev/null 2>&1; then
+  	alias tmux='direnv exec / tmux'
+  fi
 fi
