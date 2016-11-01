@@ -1,3 +1,4 @@
+" THIS CONFIG IS OUTDATED. WE USE NEOVIM NOW!
 set nocompatible        " be iMproved
 filetype off		" Required
 

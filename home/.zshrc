@@ -34,3 +34,8 @@ unsetopt correct_all
 
 # Custom PATH
 export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/racket/bin:$PATH
+
+# Enable vim mode
+bindkey -v
+
+bindkey '^R' history-incremental-pattern-search-backward

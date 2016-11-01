@@ -30,7 +30,8 @@ set clipboard=unnamed		" Use system clipboard
 
 " Display
 set title
-set number		" Display line numbers
+set relativenumber
+set number		" Hybrid line number
 set ruler		" Display cursor position
 set wrap		" Wrap lines when too long
 set scrolloff=3		" Display at least 3 lines around cursor
@@ -68,7 +69,19 @@ map <C-H> <C-W>h
 nnoremap <leader>v :e  ~/.config/nvim/init.vim<CR>
 nnoremap <leader>V :tabnew  ~/.config/nvim/init.vim<CR>
 
+" Line numbers
+function! NumberToggle()
+  if(&relativenumber == 1)
+    set number
+  else
+    set relativenumber
+  endif
+endfunc
+
+nnoremap <C-n> :call NumberToggle()<CR>	
+
 " Change cursor shape and highlight line in insert mode 
 let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1	" Support cursor change in neovim via vitality plugin
 :autocmd InsertEnter * set cul
 :autocmd InsertLeave * set nocul
+set guicursor=a:blinkon1		" Blink cursor
