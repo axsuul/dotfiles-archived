@@ -30,9 +30,7 @@
             "name": "Default profile",
             "selected": true,
             "simple_modifications": {
-                "caps_lock": "f18",
-                "left_option": "left_command",
-		"left_command": "left_option"
+                "caps_lock": "f18"
             }
         }
     ]

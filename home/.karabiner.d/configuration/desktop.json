@@ -11,6 +11,16 @@
                     },
                     "ignore": false,
                     "keyboard_type": 0
+                },
+                {
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": false,
+                        "product_id": 50481,
+                        "vendor_id": 1133
+                    },
+                    "ignore": true,
+                    "keyboard_type": 0
                 }
             ],
             "fn_function_keys": {
@@ -31,8 +41,8 @@
             "selected": true,
             "simple_modifications": {
                 "caps_lock": "f18",
-                "left_option": "left_command",
-		"left_command": "left_option"
+                "left_command": "left_option",
+                "left_option": "left_command"
             }
         }
     ]
