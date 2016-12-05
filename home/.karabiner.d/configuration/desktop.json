@@ -42,7 +42,9 @@
             "simple_modifications": {
                 "caps_lock": "f18",
                 "left_command": "left_option",
-                "left_option": "left_command"
+                "left_option": "left_command",
+		"right_command": "right_option",
+		"right_option": "right_command"
             }
         }
     ]

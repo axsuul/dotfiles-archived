@@ -5,7 +5,15 @@ hyper = {'cmd', 'ctrl', 'shift', 'alt'}
 -- Enter Hyper Mode when F18 (Hyper/Capslock) is pressed
 pressedF18 = function()
   k.triggered = false
+  k.modifier = false
   k:enter()
+
+  trigger_modifier = function()
+    k.modifier = true
+  end
+
+  -- Only trigger as modifier if held longer than thisj
+  hs.timer.doAfter(0.35, trigger_modifier)
   -- hs.alert.show('in')
 end
 
@@ -59,9 +67,15 @@ end
 --   send ESCAPE if no other keys are pressed.
 releasedF18 = function()
   k:exit()
-  -- hs.alert.show('out')
+
   if not k.triggered then
-    hs.eventtap.keyStroke({}, 'ESCAPE')
+    -- If hotkey held longer than this amount of time
+    -- let it remain as modifier and don't send ESCAPE
+    if not k.modifier then
+      hs.eventtap.keyStroke({}, 'ESCAPE')
+    else
+      print("Modifier detected")
+    end
   end
 end
 

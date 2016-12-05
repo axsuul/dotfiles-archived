@@ -3,6 +3,7 @@
         {
             "devices": [
                 {
+                    "disable_built_in_keyboard_if_exists": false,
                     "identifiers": {
                         "is_keyboard": true,
                         "is_pointing_device": false,
@@ -10,6 +11,17 @@
                         "vendor_id": 1241
                     },
                     "ignore": false,
+                    "keyboard_type": 0
+                },
+                {
+                    "disable_built_in_keyboard_if_exists": false,
+                    "identifiers": {
+                        "is_keyboard": true,
+                        "is_pointing_device": false,
+                        "product_id": 50481,
+                        "vendor_id": 1133
+                    },
+                    "ignore": true,
                     "keyboard_type": 0
                 }
             ],
@@ -30,7 +42,11 @@
             "name": "Default profile",
             "selected": true,
             "simple_modifications": {
-                "caps_lock": "f18"
+                "caps_lock": "f18",
+                "left_command": "left_option",
+                "left_option": "left_command",
+                "right_command": "right_option",
+                "right_option": "right_command"
             }
         }
     ]
