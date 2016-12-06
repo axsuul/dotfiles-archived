@@ -26,8 +26,13 @@ hyper_keys = {
   't',
   'c',
   'v',
+  's',
   'tab',
-  '`'
+  '`',
+  '1',
+  '2',
+  '-',
+  '='
 }
 
 for i, key in pairs(hyper_keys) do
@@ -47,11 +52,11 @@ apps = {
   {'f', 'Finder'},
   {'g', 'Telegram'},
   {'h', 'Google Hangouts'},
-  {'k', 'Slack'},
+  {'u', 'Slack'},
   {'m', 'iTerm2'},
   {'o', 'Todoist'},
   {'p', 'Spotify'},
-  {'l', 'Airmail 3'}
+  {'i', 'Airmail 3'}
 }
 
 for i, app in ipairs(apps) do
@@ -62,6 +67,28 @@ for i, app in ipairs(apps) do
 
   k:bind({}, app[1], launchapp, nil, nil) 
 end
+
+-- https://github.com/Hammerspoon/hammerspoon/issues/1011#issuecomment-261114434
+-- Necessary to define a new function to get faster key strokes for repeating
+fastKeyStroke = function(modifiers, key)
+  local event = require("hs.eventtap").event
+  event.newKeyEvent(modifiers, string.lower(key), true):post()
+  event.newKeyEvent(modifiers, string.lower(key), false):post()
+end
+
+-- Arrow keys
+hs.fnutils.each({
+  { modifiers={}, key='h', direction='Left' },
+  { modifiers={}, key='j', direction='Down' },
+  { modifiers={}, key='k', direction='Up' },
+  { modifiers={}, key='l', direction='Right' }
+}, function(config)
+  k:bind({}, config.key, 
+    function() fastKeyStroke(config.modifiers, config.direction) end, 
+    nil, 
+    function() fastKeyStroke(config.modifiers, config.direction) end
+  )
+end)
 
 -- Leave Hyper Mode when F18 (Hyper/Capslock) is pressed,
 --   send ESCAPE if no other keys are pressed.
