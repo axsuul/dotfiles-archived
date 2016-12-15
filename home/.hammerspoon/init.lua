@@ -74,6 +74,8 @@ fastKeyStroke = function(modifiers, key)
   local event = require("hs.eventtap").event
   event.newKeyEvent(modifiers, string.lower(key), true):post()
   event.newKeyEvent(modifiers, string.lower(key), false):post()
+
+  k.triggered = true
 end
 
 -- Arrow keys
@@ -83,7 +85,7 @@ hs.fnutils.each({
   { modifiers={}, key='k', direction='Up' },
   { modifiers={}, key='l', direction='Right' }
 }, function(config)
-  k:bind({}, config.key, 
+  k:bind(config.modifiers, config.key, 
     function() fastKeyStroke(config.modifiers, config.direction) end, 
     nil, 
     function() fastKeyStroke(config.modifiers, config.direction) end
