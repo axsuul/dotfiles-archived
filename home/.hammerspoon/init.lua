@@ -51,7 +51,7 @@ apps = {
   {'e', 'Evernote'},
   {'f', 'Finder'},
   {'g', 'Telegram'},
-  {'h', 'Google Hangouts'},
+  {'y', 'Google Hangouts - hello@james.hu'},
   {'u', 'Slack'},
   {'m', 'iTerm2'},
   {'o', 'Todoist'},
@@ -81,9 +81,17 @@ end
 -- Arrow keys
 hs.fnutils.each({
   { modifiers={}, key='h', direction='Left' },
+  { modifiers={'shift'}, key='h', direction='Left' },
+  { modifiers={'cmd'}, key='h', direction='Left' },
   { modifiers={}, key='j', direction='Down' },
+  { modifiers={'shift'}, key='j', direction='Down' },
+  { modifiers={'cmd'}, key='j', direction='Down' },
   { modifiers={}, key='k', direction='Up' },
-  { modifiers={}, key='l', direction='Right' }
+  { modifiers={'shift'}, key='k', direction='Up' },
+  { modifiers={'cmd'}, key='k', direction='Up' },
+  { modifiers={}, key='l', direction='Right' },
+  { modifiers={'shift'}, key='l', direction='Right' },
+  { modifiers={'cmd'}, key='l', direction='Right' }
 }, function(config)
   k:bind(config.modifiers, config.key, 
     function() fastKeyStroke(config.modifiers, config.direction) end, 
@@ -92,6 +100,7 @@ hs.fnutils.each({
   )
 end)
 
+-- k:bind({'shift'}, 'k', function() fastKeyStroke({'shift'}, 'Up') end, fastKeyStroke({'shift'}, 'Up'), nil)
 -- Leave Hyper Mode when F18 (Hyper/Capslock) is pressed,
 --   send ESCAPE if no other keys are pressed.
 releasedF18 = function()
@@ -109,7 +118,12 @@ releasedF18 = function()
 end
 
 -- Bind the Hyper key
-f18 = hs.hotkey.bind({}, 'F18', pressedF18, releasedF18)
+hs.hotkey.bind({}, 'F18', pressedF18, releasedF18)
+
+-- Bind so that modifiers can be pressed first before Hyper 
+-- key for combinations
+hs.hotkey.bind({'shift'}, 'F18', pressedF18, releasedF18)
+hs.hotkey.bind({'cmd'}, 'F18', pressedF18, releasedF18)
 
 -- Reload config when any lua file in config directory changes
 function reloadConfig(files)
