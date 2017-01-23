@@ -2,3 +2,5 @@
 .svn
 *~
 .*.swp
+home/.karabiner.d/configuration/karabiner.json
+home/.vim/*
