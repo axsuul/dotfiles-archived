@@ -13,7 +13,7 @@ pressedF18 = function()
   end
 
   -- Only trigger as modifier if held longer than thisj
-  hs.timer.doAfter(0.35, trigger_modifier)
+  hs.timer.doAfter(0.25, trigger_modifier)
   -- hs.alert.show('in')
 end
 
@@ -49,11 +49,13 @@ end
 apps = {
   {'b', 'Google Chrome'},
   {'e', 'Evernote'},
+  {'r', 'Bear'},
   {'f', 'Finder'},
   {'g', 'Telegram'},
   {'y', 'Google Hangouts - hello@james.hu'},
   {'u', 'Slack'},
-  {'m', 'iTerm2'},
+  {'n', 'iTerm2'},
+  {'m', 'Sublime Text 3'},
   {'o', 'Todoist'},
   {'p', 'Spotify'},
   {'i', 'Airmail 3'}
