@@ -18,5 +18,13 @@ Use [homesick](https://github.com/technicalpickles/homesick) to install these do
 ## vim
 `vim` uses the [solarized](https://github.com/altercation/solarized) color scheme. Please refer to their instructions are getting it to properly display in your terminal of choice.
 
+## nvim
+
+```
+sudo pip2 install --upgrade neovim
+```
+
+in order to use our plugins. Then do a `:PluginInstall` within **nvim**.
+
 # Chef
 There's a [Chef](http://chef.io) cookbook that exists in getting these dotfiles setup in a jiffy. [You can find it right here!](https://github.com/axsuul/cookbook-dotfiles)
