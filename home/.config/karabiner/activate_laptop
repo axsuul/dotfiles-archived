@@ -1,0 +1,2 @@
+#!/bin/bash
+cp ~/.config/karabiner/laptop.json ~/.config/karabiner/karabiner.json
