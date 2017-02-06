@@ -1,0 +1,5 @@
+#!/bin/bash
+
+~/.config/karabiner/keswitch Desktop
+
+exit 0
