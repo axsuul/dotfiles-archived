@@ -20,3 +20,5 @@ end
 karabiner_config['profiles'] = profiles
 
 File.open(karabiner_config_path, 'w') { |f| f.write(JSON.pretty_generate(karabiner_config)) }
+
+system "killall karabiner_console_user_server" 
