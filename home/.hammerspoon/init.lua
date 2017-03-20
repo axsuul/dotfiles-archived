@@ -19,10 +19,10 @@ end
 
 -- Passthrough
 hyper_keys = {
-  'a', 
-  'w', 
-  'x', 
-  'd', 
+  'a',
+  'w',
+  'x',
+  'd',
   't',
   'c',
   'v',
@@ -58,7 +58,7 @@ apps = {
   {'m', 'Sublime Text 3'},
   {'o', 'Todoist'},
   {'p', 'Spotify'},
-  {'i', 'Airmail 3'}
+  {'i', 'Polymail'}
 }
 
 for i, app in ipairs(apps) do
@@ -67,7 +67,7 @@ for i, app in ipairs(apps) do
     k.triggered = true
   end
 
-  k:bind({}, app[1], launchapp, nil, nil) 
+  k:bind({}, app[1], launchapp, nil, nil)
 end
 
 -- https://github.com/Hammerspoon/hammerspoon/issues/1011#issuecomment-261114434
@@ -85,19 +85,23 @@ hs.fnutils.each({
   { modifiers={}, key='h', direction='Left' },
   { modifiers={'shift'}, key='h', direction='Left' },
   { modifiers={'cmd'}, key='h', direction='Left' },
+  { modifiers={'shift', 'cmd'}, key='h', direction='Left' },
   { modifiers={}, key='j', direction='Down' },
   { modifiers={'shift'}, key='j', direction='Down' },
   { modifiers={'cmd'}, key='j', direction='Down' },
+  { modifiers={'shift', 'cmd'}, key='j', direction='Down' },
   { modifiers={}, key='k', direction='Up' },
   { modifiers={'shift'}, key='k', direction='Up' },
   { modifiers={'cmd'}, key='k', direction='Up' },
+  { modifiers={'shift', 'cmd'}, key='k', direction='Up' },
   { modifiers={}, key='l', direction='Right' },
   { modifiers={'shift'}, key='l', direction='Right' },
-  { modifiers={'cmd'}, key='l', direction='Right' }
+  { modifiers={'cmd'}, key='l', direction='Right' },
+  { modifiers={'shift', 'cmd'}, key='l', direction='Right' }
 }, function(config)
-  k:bind(config.modifiers, config.key, 
-    function() fastKeyStroke(config.modifiers, config.direction) end, 
-    nil, 
+  k:bind(config.modifiers, config.key,
+    function() fastKeyStroke(config.modifiers, config.direction) end,
+    nil,
     function() fastKeyStroke(config.modifiers, config.direction) end
   )
 end)
@@ -122,7 +126,7 @@ end
 -- Bind the Hyper key
 hs.hotkey.bind({}, 'F18', pressedF18, releasedF18)
 
--- Bind so that modifiers can be pressed first before Hyper 
+-- Bind so that modifiers can be pressed first before Hyper
 -- key for combinations
 hs.hotkey.bind({'shift'}, 'F18', pressedF18, releasedF18)
 hs.hotkey.bind({'cmd'}, 'F18', pressedF18, releasedF18)
