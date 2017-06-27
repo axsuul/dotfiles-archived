@@ -17,3 +17,6 @@ alias vr="vagrant reload"
 alias vh="vagrant halt"
 alias vd="vagrant destroy"
 alias vs="vagrant ssh"
+
+# Docker
+alias dc="docker-compose"
