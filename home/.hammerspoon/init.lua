@@ -32,7 +32,8 @@ hyper_keys = {
   '1',
   '2',
   '-',
-  '='
+  '=',
+  '\\'
 }
 
 for i, key in pairs(hyper_keys) do
@@ -47,18 +48,19 @@ end
 
 -- Applications
 apps = {
-  {'b', 'Google Chrome'},
   {'e', 'Evernote'},
   {'r', 'Bear'},
-  {'f', 'Finder'},
-  {'g', 'Telegram'},
-  {'y', 'Google Hangouts - hello@james.hu'},
+  {'y', 'WhatsApp'},
   {'u', 'Slack'},
-  {'n', 'iTerm2'},
-  {'m', 'Sublime Text 3'},
+  {'i', 'Airmail 3'},
   {'o', 'Todoist'},
   {'p', 'Spotify'},
-  {'i', 'Polymail'}
+  {'f', 'Finder'},
+  {'g', 'Telegram'},
+  {';', 'Discord'},
+  {'b', 'Google Chrome'},
+  {'n', 'iTerm2'},
+  {'m', 'Sublime Text 3'}
 }
 
 for i, app in ipairs(apps) do
