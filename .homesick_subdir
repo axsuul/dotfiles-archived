@@ -4,3 +4,4 @@
 .karabiner.d
 .config
 .homesick/repos/dotfiles/home/.config/karabiner
+.ssh
