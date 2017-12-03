@@ -19,21 +19,22 @@ end
 
 -- Passthrough
 hyper_keys = {
-  'a',
-  'w',
-  'x',
-  'd',
+  -- Moom
+  'a', 'w', 'x', 'd', 's', 'tab', '1', '2',
+
+  -- Translate Bar
   't',
-  'c',
+
+  -- Alfred
   'v',
-  's',
-  'tab',
+
+  -- macOS Sidebar
+  '\\',
+
+  'c',
   '`',
-  '1',
-  '2',
   '-',
   '=',
-  '\\'
 }
 
 for i, key in pairs(hyper_keys) do
