@@ -6,8 +6,9 @@ elif [ -s "/usr/local/rbenv" ]; then
   export RBENV_ROOT="$rbenv_root"
 fi
 
-# Load in rbenv if we have it
-if [ -n "$rbenv_root" ]; then
+ # Lazy load rbenv
+rbenv() {
   export PATH="${rbenv_root}/bin:$PATH"
-  eval "$(rbenv init -)"
-fi
+  eval "$(command rbenv init -)"
+  rbenv "$@"
+}
