@@ -33,7 +33,7 @@ source $ZSH/oh-my-zsh.sh
 unsetopt correct_all
 
 # Custom PATH
-export PATH=/usr/local/bin:/usr/local/sbin:/usr/local/racket/bin:$PATH
+export PATH=/usr/local/bin:/usr/local/sbin:$PATH
 
 # vi mode
 # This function changes the cursor depending on if in normal or insert mode
