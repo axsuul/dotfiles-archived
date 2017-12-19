@@ -1,7 +1,4 @@
 .initializers
-.homesick/repos/dotfiles/home/.vim
-.homesick/repos/dotfiles/home/.initializers
 .karabiner.d
 .config
-.homesick/repos/dotfiles/home/.config/karabiner
 .ssh
