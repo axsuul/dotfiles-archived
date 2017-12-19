@@ -53,7 +53,7 @@ apps = {
   {'r', 'Bear'},
   {'y', 'WhatsApp'},
   {'u', 'Slack'},
-  {'i', 'Airmail 3'},
+  {'i', 'Polymail'},
   {'o', 'Todoist'},
   {'p', 'Spotify'},
   {'f', 'Finder'},
