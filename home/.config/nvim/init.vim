@@ -1,6 +1,8 @@
 set nocompatible        " be iMproved
 filetype off		" Required
 
+let g:actualvim = get(g:, 'actualvim', "0")
+
 " Vundle
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -96,20 +98,22 @@ endfunc
 
 nnoremap <C-n> :call NumberToggle()<CR>	
 
-" NERDTree
-autocmd VimEnter * NERDTree   " Activate NERDTree on launch
-autocmd VimEnter * wincmd p   " Focus on main window
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif   " Autoclose NERDTree
+if !g:actualvim
+  " NERDTree
+  autocmd VimEnter * NERDTree   " Activate NERDTree on launch
+  autocmd VimEnter * wincmd p   " Focus on main window
+  autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif   " Autoclose NERDTree
 
-" Change cursor shape and highlight line in insert mode 
-let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1	" Support cursor change in neovim via vitality plugin
-:autocmd InsertEnter * set cul
-:autocmd InsertLeave * set nocul
-set guicursor=a:blinkon1		" Blink cursor
+  " Change cursor shape and highlight line in insert mode 
+  let $NVIM_TUI_ENABLE_CURSOR_SHAPE=1	" Support cursor change in neovim via vitality plugin
+  :autocmd InsertEnter * set cul
+  :autocmd InsertLeave * set nocul
+  set guicursor=a:blinkon1		" Blink cursor
 
-" Netrw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
+  " Netrw
+  let g:netrw_banner = 0
+  let g:netrw_liststyle = 3
+  let g:netrw_browse_split = 4
+  let g:netrw_altv = 1
+  let g:netrw_winsize = 25
+endif
