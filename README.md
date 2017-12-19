@@ -1,30 +1,30 @@
 # dotfiles 
-Gotta have my dotfiles! Plays nicely with: 
+[Gotta have my dotfiles!](https://www.youtube.com/watch?v=Kt6JI9gzECo) Plays nicely with: 
 
 - git
-- vim
+- nvim
 - tmux
 - oh-my-zsh
 - rbenv
 - direnv
+- scm_breeze
 
 # Installation
-Use [homesick](https://github.com/technicalpickles/homesick) to install these dotfiles. Yes, it requires [Ruby](http://ruby-lang.org)! Thankfully it works on `1.8.7` so you can still be an old tard.
+Use [homesick](https://github.com/technicalpickles/homesick) to install these dotfiles
 
     $ gem install homesick
     $ homesick clone axsuul/dotfiles
     $ homesick symlink axsuul/dotfiles
 
-## vim
-`vim` uses the [solarized](https://github.com/altercation/solarized) color scheme. Please refer to their instructions are getting it to properly display in your terminal of choice.
+# Neovim
 
-## nvim
+Ensure Vundle is installed
 
 ```
-sudo pip2 install --upgrade neovim
+$ git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 ```
 
-in order to use our plugins. Then do a `:PluginInstall` within **nvim**.
+Then run `:PluginInstall` within **nvim** to install plugins.
 
 # Chef
 There's a [Chef](http://chef.io) cookbook that exists in getting these dotfiles setup in a jiffy. [You can find it right here!](https://github.com/axsuul/cookbook-dotfiles)
