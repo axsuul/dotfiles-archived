@@ -20,3 +20,8 @@ alias vs="vagrant ssh"
 
 # Docker
 alias dc="docker-compose"
+
+# Neovim
+# Use \vim to access original vim
+alias vim="nvim"
+alias vi="nvim"
