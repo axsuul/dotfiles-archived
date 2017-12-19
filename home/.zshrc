@@ -18,15 +18,15 @@ export DISABLE_AUTO_TITLE="true"
 # Uncomment following line if you want to disable colors in ls
 # export DISABLE_LS_COLORS="true"
 
-# Load common
-[[ -s "$HOME/.commonrc" ]] && source "$HOME/.commonrc"
+# Load OH MY ZSHELL!
+source $ZSH/oh-my-zsh.sh
 
 # Which plugins would you like to load? (plugins can be found in ~/.oh-my-zsh/plugins/*)
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(ssh-agent)
 
-# Load OH MY ZSHELL!
-source $ZSH/oh-my-zsh.sh
+# Load common
+[[ -s "$HOME/.commonrc" ]] && source "$HOME/.commonrc"
 
 # Disable the annoying autocorrect feature
 # Must come after sourcing oh-my-zsh.sh
