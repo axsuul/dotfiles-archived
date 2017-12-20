@@ -1,1 +1,5 @@
-/Users/axsuul/.homesick/repos/dotfiles/home/.homesick/repos/dotfiles/home/.config/karabiner/keswitch_default
+#!/bin/bash
+
+~/.config/karabiner/keswitch Default
+
+exit 0
