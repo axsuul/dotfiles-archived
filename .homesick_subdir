@@ -1,3 +1,5 @@
 .initializers
 .config
+.config/karabiner
+.config/nvim
 .ssh
