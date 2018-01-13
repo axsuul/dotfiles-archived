@@ -3,15 +3,9 @@
 	email = hello@james.hu
 [github]
     user = axsuul
-[difftool "sourcetree"]
-	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
-	path =
-[mergetool "sourcetree"]
-	cmd = /Applications/SourceTree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
-	trustExitCode = true
 [core]
-	excludesfile = /Users/axsuul/.gitignore_global
+	excludesfile = ~/.gitignore_global
 [commit]
-	template = /Users/axsuul/.stCommitMsg
+	template = ~/.stCommitMsg
 [push]
 	default = simple
