@@ -10,9 +10,9 @@ fi
 [[ -f "$HOME/.aliases" ]] && source "$HOME/.aliases"
 [[ -f "$HOME/.functions" ]] && source "$HOME/.functions"
 
-# Include our scripts into $PATH
-[[ -d "$HOME/.scripts" ]] && export PATH=$HOME/.scripts:$PATH
+# Include local bin into PATH
+[[ -d "$HOME/bin" ]] && export PATH=$HOME/bin:$PATH
 
-# Use neovim as default editor 
+# Use neovim as default editor
 export VISUAL=nvim
 export EDITOR="$VISUAL"
