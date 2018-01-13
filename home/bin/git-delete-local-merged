@@ -1,0 +1,8 @@
+#!/bin/sh
+#
+# Delete all local branches that have been merged into HEAD
+
+for branch in $(git branch --merged | grep -v "master")
+do
+  git branch -d "$branch";
+done

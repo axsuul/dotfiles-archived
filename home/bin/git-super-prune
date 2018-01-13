@@ -1,0 +1,4 @@
+#!/bin/sh
+
+git delete-local-merged
+git remote prune origin
