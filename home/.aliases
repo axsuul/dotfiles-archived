@@ -20,6 +20,11 @@ alias vs="vagrant ssh"
 
 # Docker
 alias dc="docker-compose"
+alias dcu="docker-compose up"
+alias dcrs="docker-compose restart"
+alias dcr="docker-compose run"
+alias dce="docker-compose exec"
+alias dcs="docker-compose stop"
 
 # Neovim
 # Use \vim to access original vim
