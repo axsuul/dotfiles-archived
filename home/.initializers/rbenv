@@ -3,12 +3,10 @@ if [ -s "${HOME}/.rbenv/bin" ]; then
   rbenv_root="${HOME}/.rbenv"
 elif [ -s "/usr/local/rbenv" ]; then
   rbenv_root="/usr/local/rbenv"
-  export RBENV_ROOT="$rbenv_root"
 fi
 
- # Lazy load rbenv
-rbenv() {
-  export PATH="${rbenv_root}/bin:$PATH"
-  eval "$(command rbenv init -)"
-  rbenv "$@"
-}
+# Add rbenv to PATH
+export PATH="${rbenv_root}/bin:$PATH"
+
+# Add rbenv shims to PATH
+export PATH="${rbenv_root}/shims:$PATH"
