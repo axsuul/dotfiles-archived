@@ -20,6 +20,7 @@ alias vs="vagrant ssh"
 
 # Docker
 alias dc="docker-compose"
+alias dcb="docker-compose build"
 alias dcu="docker-compose up"
 alias dcrs="docker-compose restart"
 alias dcr="docker-compose run"
