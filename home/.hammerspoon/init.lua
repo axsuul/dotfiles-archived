@@ -59,19 +59,34 @@ apps = {
   {'f', 'Finder'},
   {'g', 'Telegram'},
   {';', 'Discord'},
-  {'b', 'Google Chrome'},
   {'n', 'iTerm2'},
   {'m', 'Sublime Text 3'}
 }
 
 for i, app in ipairs(apps) do
-  launchapp = function()
+  launchApplication = function()
     hs.application.launchOrFocus(app[2])
     k.triggered = true
   end
 
-  k:bind({}, app[1], launchapp, nil, nil)
+  k:bind({}, app[1], launchApplication, nil, nil)
 end
+
+-- Open specific browser depending on what's open
+launchBrowser = function()
+  browser = 'Google Chrome'
+
+  if hs.application.find('Safari') then
+    browser = 'Safari'
+  end
+
+  print(browser)
+
+  hs.application.launchOrFocus(browser)
+  k.triggered = true
+end
+
+k:bind({}, 'b', launchBrowser, nil, nil)
 
 -- https://github.com/Hammerspoon/hammerspoon/issues/1011#issuecomment-261114434
 -- Necessary to define a new function to get faster key strokes for repeating
