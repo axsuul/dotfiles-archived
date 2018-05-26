@@ -72,16 +72,33 @@ for i, app in ipairs(apps) do
   k:bind({}, app[1], launchApplication, nil, nil)
 end
 
--- Open specific browser depending on what's open
-launchBrowser = function()
-  browser = 'Google Chrome'
+-- Default browser
+browser = 'Google Chrome'
+safariPid = nil
 
-  if hs.application.find('Safari') then
-    browser = 'Safari'
+function onAppLaunched(appName, eventType, app)
+  if eventType == hs.application.watcher.launched then
+    if appName == 'Safari' then
+      browser = 'Safari'
+      safariPid = app:pid()
+
+      print("Safari launched, setting browser to Safari with PID " .. safariPid)
+    end
+  elseif eventType == hs.application.watcher.terminated then
+    if app:pid() == safariPid then
+      browser = 'Google Chrome'
+      safariPid = nil
+
+      print("Application with PID " .. safariPid .. " matching Safari terminated, setting browser to Google Chrome")
+    end
   end
+end
 
-  print(browser)
+-- Open specific browser depending on what's open
+appWatcher = hs.application.watcher.new(onAppLaunched)
+appWatcher:start()
 
+launchBrowser = function()
   hs.application.launchOrFocus(browser)
   k.triggered = true
 end
