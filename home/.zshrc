@@ -25,6 +25,9 @@ source $ZSH/oh-my-zsh.sh
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(ssh-agent)
 
+# Enable vi mode
+bindkey -v
+
 # Load common
 [[ -s "$HOME/.commonrc" ]] && source "$HOME/.commonrc"
 
@@ -58,8 +61,11 @@ zle -N zle-line-init
 zle -N zle-line-finish
 zle -N zle-keymap-select
 
-bindkey -v    # enable vi mode
-bindkey '^R' history-incremental-pattern-search-backward  # enable ctrl+R history search, must come after bindkey -v
+# Enable ctrl+R history search if we don't have fzf
+# Must come after bindkey -v
+if [[ ! -f ~/.fzf.zsh ]]; then
+  bindkey '^R'
+fi
 
 # How long to wait for additional characters in sequence (hundreths of second)
 # A value of '1' is 10ms
