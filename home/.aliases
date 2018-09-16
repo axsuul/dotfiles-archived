@@ -31,3 +31,7 @@ alias dcs="docker-compose stop"
 # Use \vim to access original vim
 alias vim="nvim"
 alias vi="nvim"
+
+# Git
+alias gbs="git branch --sort=committerdate"
+alias gbsr="git branch --sort=committerdate --remote"

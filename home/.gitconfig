@@ -1,11 +1,9 @@
 [user]
-	name = James Hu
-	email = hello@james.hu
+  name = James Hu
+  email = hello@james.hu
 [github]
-    user = axsuul
+  user = axsuul
 [core]
-	excludesfile = ~/.gitignore_global
-[commit]
-	template = ~/.stCommitMsg
+  excludesfile = ~/.gitignore_global
 [push]
-	default = simple
+  default = current
