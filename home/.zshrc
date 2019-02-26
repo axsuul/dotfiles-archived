@@ -25,9 +25,6 @@ source $ZSH/oh-my-zsh.sh
 # Example format: plugins=(rails git textmate ruby lighthouse)
 plugins=(ssh-agent)
 
-# Enable vi mode
-bindkey -v
-
 # Load common
 [[ -s "$HOME/.commonrc" ]] && source "$HOME/.commonrc"
 
