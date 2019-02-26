@@ -34,4 +34,10 @@ alias vi="nvim"
 
 # Git
 alias gbs="git branch --sort=committerdate"
+alias gbc="git-copy-branch-name"
 alias gbsr="git branch --sort=committerdate --remote"
+alias gdp="git diff @~..@"  # git diff previous commit
+alias grbs="git rebase --skip"
+alias grsm="git reset --mixed"
+alias gst="git stash"
+alias gstp="git stash pop"
