@@ -19,11 +19,11 @@ end
 
 -- Passthrough
 hyper_keys = {
-  -- Moom
-  'a', 'w', 'x', 'd', 's', 'tab', '1', '2',
+  -- 1Password
+  '1',
 
-  -- Translate Bar
-  't',
+  -- Moom
+  'a', 'w', 'x', 'd', 's', 'tab', '9', '0',
 
   -- Alfred
   'v',
@@ -60,7 +60,8 @@ apps = {
   {'g', 'Telegram'},
   {';', 'Discord'},
   {'n', 'iTerm2'},
-  {'m', 'Sublime Text 3'}
+  {'m', 'Sublime Text 3'},
+  {'t', 'Google Translate'}
 }
 
 for i, app in ipairs(apps) do
