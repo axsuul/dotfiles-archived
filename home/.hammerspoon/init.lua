@@ -31,20 +31,60 @@ hyper_keys = {
   -- macOS Sidebar
   '\\',
 
+  -- TextExpander
+  's',
+
   'c',
   '`',
   '-',
   '=',
 }
 
-for i, key in pairs(hyper_keys) do
+passthrough_definitions = {
+  -- 1Password
+  {hyper, '1'},
+
+  -- Moom
+  {hyper, 'a'},
+  {hyper, 'w'},
+  {hyper, 'x'},
+  {hyper, 'd'},
+  {hyper, 's'},
+  {hyper, 'tab'},
+  {hyper, '9'},
+  {hyper, '0'},
+
+  -- Alfred
+  {hyper, 'v'},
+
+  -- macOS Sidebar
+  {hyper, '\\'},
+
+  -- TextExpander
+  {hyper, '`'},
+
+  -- Finder
+  {hyper, 'c'},
+
+  -- Anki
+  {hyper, '='},
+
+  -- ??
+  {hyper, '-'},
+}
+
+for i, definition in pairs(passthrough_definitions) do
+  -- Note that Lua copies by reference so assigning variable doesn't work
+  -- modifier is definition[2]
+  -- key is definition[2]
+
   passthrough = function()
-    hs.eventtap.keyStroke(hyper, key)
+    hs.eventtap.keyStroke(definition[1], definition[2])
     k.triggered = true
   end
+
   -- Uncomment line below when binding new
-  -- k:bind({}, key, nil, passthrough, passthrough)
-  k:bind({}, key, passthrough, nil, nil)
+  k:bind({}, definition[2], passthrough, nil, nil)
 end
 
 -- Applications
@@ -60,8 +100,9 @@ apps = {
   {'g', 'Telegram'},
   {';', 'Discord'},
   {'n', 'iTerm2'},
-  {'m', 'Sublime Text 3'},
-  {'t', 'Google Translate'}
+  {'m', 'Sublime Text'},
+  {'t', 'Google Translate'},
+  {'=', 'Anki'},
 }
 
 for i, app in ipairs(apps) do
@@ -79,11 +120,11 @@ safariPid = nil
 
 function onAppLaunched(appName, eventType, app)
   if eventType == hs.application.watcher.launched then
-    if appName == 'Safari' then
-      browser = 'Safari'
+    if appName == 'Firefox' then
+      browser = 'Firefox'
       safariPid = app:pid()
 
-      print("Safari launched, setting browser to Safari with PID " .. safariPid)
+      print("Firefox launched, setting browser to Firefox with PID " .. safariPid)
     end
   elseif eventType == hs.application.watcher.terminated then
     if app:pid() == safariPid then

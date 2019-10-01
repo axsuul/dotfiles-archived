@@ -16,3 +16,6 @@ fi
 # Use neovim as default editor
 export VISUAL=nvim
 export EDITOR="$VISUAL"
+
+# Limits Syncthing CPU usage
+export GOMAXPROCS=1

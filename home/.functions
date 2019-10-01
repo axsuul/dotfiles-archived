@@ -1,1 +1,4 @@
-# Nothing in here yet
+# Enables you do to do gacp -m "another test passes"
+gacp() {
+  git add . && git commit "$@" && git push
+}

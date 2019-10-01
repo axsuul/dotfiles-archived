@@ -33,6 +33,7 @@ alias vim="nvim"
 alias vi="nvim"
 
 # Git
+alias gac="git add . && git commit"
 alias gbs="git branch --sort=committerdate"
 alias gbc="git-copy-branch-name"
 alias gbsr="git branch --sort=committerdate --remote"
