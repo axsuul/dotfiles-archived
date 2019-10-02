@@ -2,3 +2,11 @@
 gacp() {
   git add . && git commit "$@" && git push
 }
+
+# Rebase and squash all commits on top of master (by default) or can supply
+# another branch as first argument
+gsq() {
+  BRANCH=${1:-master}
+
+  GIT_SEQUENCE_EDITOR='sed -i '' -e "2,\$s/pick/f/"' git rebase -i $BRANCH
+}
