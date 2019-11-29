@@ -43,3 +43,6 @@ alias grbs="git rebase --skip"
 alias grsm="git reset --mixed"
 alias gst="git stash"
 alias gstp="git stash pop"
+
+# Ruby
+alias be="bundle exec"
