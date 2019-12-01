@@ -60,6 +60,9 @@ passthrough_definitions = {
   -- macOS Sidebar
   {hyper, '\\'},
 
+  -- Mate Translate
+  {hyper, 't'},
+
   -- TextExpander
   {hyper, '`'},
 
@@ -101,7 +104,6 @@ apps = {
   {';', 'Discord'},
   {'n', 'iTerm2'},
   {'m', 'Sublime Text'},
-  {'t', 'Google Translate'},
   {'=', 'Anki'},
 }
 

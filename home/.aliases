@@ -27,11 +27,6 @@ alias dcr="docker-compose run"
 alias dce="docker-compose exec"
 alias dcs="docker-compose stop"
 
-# Neovim
-# Use \vim to access original vim
-alias vim="nvim"
-alias vi="nvim"
-
 # Git
 alias gcom="git checkout master"
 alias gac="git add . && git commit"
