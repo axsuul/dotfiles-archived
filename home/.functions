@@ -1,12 +1,25 @@
-# Enables you do to do gacp -m "another test passes"
-gacp() {
+# Commits staged and pushes in one go (e.g. gcps -m "another test passes")
+gcps() {
+  git commit "$@" && git push
+}
+
+# Commits all changes and pushes in one go (e.g. gacps -m "another test passes")
+gacps() {
   git add . && git commit "$@" && git push
 }
 
-# Rebase and squash all commits on top of master (by default) or can supply
-# another branch as first argument
+# Rebase and squash all commits on top of master (by default) or can supply another branch as first argument
 gsq() {
   BRANCH=${1:-master}
 
   GIT_SEQUENCE_EDITOR='sed -i '' -e "2,\$s/pick/f/"' git rebase -i $BRANCH
+}
+
+# Checkout from list of branches sorted by most recent commit using fzf
+gcof() {
+  local BRANCHES BRANCH
+
+  BRANCHES=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
+  BRANCH=$(echo "$BRANCHES" | fzf-tmux -d $(( 2 + $(wc -l <<< "$BRANCHES") )) +m) &&
+  git checkout $(echo "$BRANCH" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }

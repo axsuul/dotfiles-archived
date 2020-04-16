@@ -28,16 +28,20 @@ alias dce="docker-compose exec"
 alias dcs="docker-compose stop"
 
 # Git
-alias gcom="git checkout master"
 alias gac="git add . && git commit"
 alias gbs="git branch --sort=committerdate"
 alias gbc="git-copy-branch-name"
-alias gbsr="git branch --sort=committerdate --remote"
+alias gcom="git checkout master"
+alias gdm="git diff master"
 alias gdp="git diff @~..@"  # git diff previous commit
+alias grbm="git rebase master"
 alias grbs="git rebase --skip"
 alias grsm="git reset --mixed"
 alias gst="git stash"
 alias gstp="git stash pop"
+
+# GitHub
+alias ghps="gh pr status"
 
 # Ruby
 alias be="bundle exec"
