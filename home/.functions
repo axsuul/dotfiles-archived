@@ -5,7 +5,7 @@ gcps() {
 
 # Commits all changes and pushes in one go (e.g. gacps -m "another test passes")
 gacps() {
-  git add . && git commit "$@" && git push
+  git add -A && git commit "$@" && git push
 }
 
 # Rebase and squash all commits on top of master (by default) or can supply another branch as first argument
