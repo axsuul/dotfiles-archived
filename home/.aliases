@@ -19,6 +19,7 @@ alias grbm="git rebase master"
 alias grbs="git rebase --skip"
 alias grsm="git reset --mixed"
 alias gst="git stash"
+alias gstst="git stash -- $(git diff --staged --name-only)" # stash only staged files
 alias gstp="git stash pop"
 
 # GitHub (gh cli)
