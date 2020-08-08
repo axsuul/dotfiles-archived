@@ -17,73 +17,49 @@ pressedF18 = function()
   -- hs.alert.show('in')
 end
 
+-- https://github.com/Hammerspoon/hammerspoon/issues/1011#issuecomment-261114434
+-- Necessary to define a new function to get faster key strokes for repeating
+fastKeyStroke = function(modifiers, key)
+  local event = require("hs.eventtap").event
+  event.newKeyEvent(modifiers, string.lower(key), true):post()
+  event.newKeyEvent(modifiers, string.lower(key), false):post()
+
+  k.triggered = true
+end
+
 -- Passthrough
-hyper_keys = {
-  -- 1Password
-  '1',
-
-  -- Moom
-  'a', 'w', 'x', 'd', 's', 'tab', '9', '0',
-
-  -- Alfred
-  'v',
-
-  -- macOS Sidebar
-  '\\',
-
-  -- TextExpander
-  's',
-
-  'c',
-  '`',
-  '-',
-  '=',
-}
-
 passthrough_definitions = {
   -- 1Password
   {hyper, '1'},
 
-  -- Moom
-  {hyper, 'a'},
-  {hyper, 'w'},
-  {hyper, 'x'},
-  {hyper, 'd'},
-  {hyper, 's'},
-  {hyper, 'tab'},
-  {hyper, '9'},
-  {hyper, '0'},
-
   -- Alfred
   {hyper, 'v'},
+
+  -- Fantastical
+  {hyper, 'c'},
 
   -- macOS Sidebar
   {hyper, '\\'},
 
-  -- Mate Translate
-  {hyper, 't'},
-
-  -- TextExpander
-  {hyper, '`'},
-
-  -- Finder
-  {hyper, 'c'},
-
-  -- Anki
-  {hyper, '='},
-
-  -- ??
-  {hyper, '-'},
+  -- Moom
+  {hyper, 'a'},
+  {hyper, 's'},
+  {hyper, 'd'},
+  {hyper, 'tab'},
+  {hyper, '9'},
+  {hyper, '0'},
 }
 
 for i, definition in pairs(passthrough_definitions) do
   -- Note that Lua copies by reference so assigning variable doesn't work
-  -- modifier is definition[2]
+  -- modifier is definition[1]
   -- key is definition[2]
 
   passthrough = function()
-    hs.eventtap.keyStroke(definition[1], definition[2])
-    k.triggered = true
+    print('Triggering passthrough: hyper + ' .. definition[2])
+
+    fastKeyStroke(definition[1], definition[2])
+    -- k.triggered = true
   end
 
   -- Uncomment line below when binding new
@@ -92,19 +68,22 @@ end
 
 -- Applications
 apps = {
+  {';', 'Discord'},
+  {'/', 'Intercom'},
+  {'b', 'Firefox'},
   {'e', 'Evernote'},
-  {'r', 'Bear'},
-  {'y', 'WhatsApp'},
-  {'u', 'Slack'},
-  {'i', 'Polymail'},
-  {'o', 'Todoist'},
-  {'p', 'Spotify'},
   {'f', 'Finder'},
   {'g', 'Telegram'},
-  {';', 'Discord'},
-  {'n', 'iTerm2'},
+  {'i', 'Polymail'},
   {'m', 'Sublime Text'},
-  {'=', 'Anki'},
+  {'n', 'iTerm2'},
+  {'o', 'Todoist'},
+  {'p', 'Spotify'},
+  {'r', 'Google Chrome'},
+  {'t', 'Google Translate'},
+  {'u', 'Slack'},
+  {'w', 'Bear'},
+  {'y', 'WhatsApp'},
 }
 
 for i, app in ipairs(apps) do
@@ -116,66 +95,70 @@ for i, app in ipairs(apps) do
   k:bind({}, app[1], launchApplication, nil, nil)
 end
 
--- Default browser
-browser = 'Google Chrome'
-safariPid = nil
+-- function onAppLaunched(appName, eventType, app)
+--   if eventType == hs.application.watcher.launched then
+--     if appName == 'Firefox' then
+--       browser = 'Firefox'
+--       safariPid = app:pid()
 
-function onAppLaunched(appName, eventType, app)
-  if eventType == hs.application.watcher.launched then
-    if appName == 'Firefox' then
-      browser = 'Firefox'
-      safariPid = app:pid()
+--       print("Firefox launched, setting browser to Firefox with PID " .. safariPid)
+--     end
+--   elseif eventType == hs.application.watcher.terminated then
+--     if app:pid() == safariPid then
+--       browser = 'Google Chrome'
+--       safariPid = nil
 
-      print("Firefox launched, setting browser to Firefox with PID " .. safariPid)
-    end
-  elseif eventType == hs.application.watcher.terminated then
-    if app:pid() == safariPid then
-      browser = 'Google Chrome'
-      safariPid = nil
-
-      print("Application with PID " .. safariPid .. " matching Safari terminated, setting browser to Google Chrome")
-    end
-  end
-end
+--       print("Application with PID " .. safariPid .. " matching Safari terminated, setting browser to Google Chrome")
+--     end
+--   end
+-- end
 
 -- Open specific browser depending on what's open
-appWatcher = hs.application.watcher.new(onAppLaunched)
-appWatcher:start()
+-- appWatcher = hs.application.watcher.new(onAppLaunched)
+-- appWatcher:start()
 
-launchBrowser = function()
-  hs.application.launchOrFocus(browser)
-  k.triggered = true
-end
-
-k:bind({}, 'b', launchBrowser, nil, nil)
-
--- https://github.com/Hammerspoon/hammerspoon/issues/1011#issuecomment-261114434
--- Necessary to define a new function to get faster key strokes for repeating
-fastKeyStroke = function(modifiers, key)
-  local event = require("hs.eventtap").event
-  event.newKeyEvent(modifiers, string.lower(key), true):post()
-  event.newKeyEvent(modifiers, string.lower(key), false):post()
-
-  k.triggered = true
-end
-
--- Arrow keys
+-- Arrow key bindings. Capslock must be held down first before the other modifiers for these to trigger
 hs.fnutils.each({
+  -- basic arrow key movement
   { modifiers={}, key='h', direction='Left' },
-  { modifiers={'shift'}, key='h', direction='Left' },
-  { modifiers={'cmd'}, key='h', direction='Left' },
-  { modifiers={'shift', 'cmd'}, key='h', direction='Left' },
   { modifiers={}, key='j', direction='Down' },
-  { modifiers={'shift'}, key='j', direction='Down' },
-  { modifiers={'cmd'}, key='j', direction='Down' },
-  { modifiers={'shift', 'cmd'}, key='j', direction='Down' },
   { modifiers={}, key='k', direction='Up' },
-  { modifiers={'shift'}, key='k', direction='Up' },
-  { modifiers={'cmd'}, key='k', direction='Up' },
-  { modifiers={'shift', 'cmd'}, key='k', direction='Up' },
   { modifiers={}, key='l', direction='Right' },
+
+  -- shift + arrow key movement
+  { modifiers={'shift'}, key='h', direction='Left' },
+  { modifiers={'shift'}, key='j', direction='Down' },
+  { modifiers={'shift'}, key='k', direction='Up' },
   { modifiers={'shift'}, key='l', direction='Right' },
+
+  -- option + arrow key movement
+  { modifiers={'option'}, key='h', direction='Left' },
+  { modifiers={'option'}, key='j', direction='Down' },
+  { modifiers={'option'}, key='k', direction='Up' },
+  { modifiers={'option'}, key='l', direction='Right' },
+
+  -- option + cmd + arrow key movement
+  { modifiers={'option', 'cmd'}, key='h', direction='Left' },
+  { modifiers={'option', 'cmd'}, key='j', direction='Down' },
+  { modifiers={'option', 'cmd'}, key='k', direction='Up' },
+  { modifiers={'option', 'cmd'}, key='l', direction='Right' },
+
+  -- option + shift + arrow key movement
+  { modifiers={'option', 'shift'}, key='h', direction='Left' },
+  { modifiers={'option', 'shift'}, key='j', direction='Down' },
+  { modifiers={'option', 'shift'}, key='k', direction='Up' },
+  { modifiers={'option', 'shift'}, key='l', direction='Right' },
+
+  -- cmd + arrow key movement
+  { modifiers={'cmd'}, key='h', direction='Left' },
+  { modifiers={'cmd'}, key='j', direction='Down' },
+  { modifiers={'cmd'}, key='k', direction='Up' },
   { modifiers={'cmd'}, key='l', direction='Right' },
+
+  -- shift + cmd + arrow key movement
+  { modifiers={'shift', 'cmd'}, key='h', direction='Left' },
+  { modifiers={'shift', 'cmd'}, key='j', direction='Down' },
+  { modifiers={'shift', 'cmd'}, key='k', direction='Up' },
   { modifiers={'shift', 'cmd'}, key='l', direction='Right' }
 }, function(config)
   k:bind(config.modifiers, config.key,
