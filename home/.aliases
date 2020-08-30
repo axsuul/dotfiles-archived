@@ -18,8 +18,9 @@ alias gdp="git diff @~..@" # diff between current commit and previous commit
 alias grbm="git rebase master"
 alias grbs="git rebase --skip"
 alias grsm="git reset --mixed"
+alias grsmp="git reset --mixed \$(git rev-parse @~)" # git reset (mixed) to previous commit
 alias gst="git stash"
-alias gstst="git stash -- $(git diff --staged --name-only)" # stash only staged files
+alias gstst="git stash -- \$(git diff --staged --name-only)" # stash only staged files
 alias gstp="git stash pop"
 
 # GitHub (gh cli)

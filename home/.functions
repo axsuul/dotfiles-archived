@@ -15,6 +15,12 @@ gsq() {
   GIT_SEQUENCE_EDITOR='sed -i '' -e "2,\$s/pick/f/"' git rebase -i $BRANCH
 }
 
+# Rebase and squash current commit on top of previous commit
+gsqp() {
+  # We need to pass in the ref of commit that's before the previous commit due to how rebase works
+  gsq $(git rev-parse @~2)
+}
+
 # Checkout from list of branches sorted by most recent commit using fzf
 gcof() {
   local BRANCHES BRANCH
