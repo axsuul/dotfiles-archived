@@ -25,7 +25,7 @@ gsqp() {
 gcof() {
   local BRANCHES BRANCH
 
-  BRANCHES=$(git for-each-ref --count=30 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
+  BRANCHES=$(git for-each-ref --count=120 --sort=-committerdate refs/heads/ --format="%(refname:short)") &&
   BRANCH=$(echo "$BRANCHES" | fzf-tmux -d $(( 2 + $(wc -l <<< "$BRANCHES") )) +m) &&
   git checkout $(echo "$BRANCH" | sed "s/.* //" | sed "s#remotes/[^/]*/##")
 }
