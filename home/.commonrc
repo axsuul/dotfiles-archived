@@ -13,8 +13,9 @@ fi
 # Include local bin into PATH
 [[ -d "$HOME/bin" ]] && export PATH=$HOME/bin:$PATH
 
-# Use neovim as default editor
-export VISUAL=nvim
+# Use Sublime Text as default editor. The -w is to keep the subl process around until the file is closed so that
+# encrypted files (e.g. Ansible Vault) can be re-encrypted properly
+export VISUAL="subl -w"
 export EDITOR="$VISUAL"
 
 # Limits Syncthing CPU usage

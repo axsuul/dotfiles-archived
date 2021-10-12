@@ -1,5 +1,5 @@
 module.exports = {
-  defaultBrowser: 'Firefox',
+  defaultBrowser: 'Safari',
   handlers: [
     // Open all Spotify links in Spotify
     {

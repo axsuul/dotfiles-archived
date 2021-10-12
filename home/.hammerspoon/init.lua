@@ -48,6 +48,9 @@ passthrough_definitions = {
   {hyper, 'tab'},
   {hyper, '9'},
   {hyper, '0'},
+
+  -- Alfred
+  {hyper, 'space'},
 }
 
 for i, definition in pairs(passthrough_definitions) do
@@ -70,25 +73,32 @@ end
 apps = {
   {';', 'Discord'},
   {'/', 'Intercom'},
-  {'b', 'Firefox'},
+  {'b', 'Safari'},
   {'e', 'Evernote'},
   {'f', 'Finder'},
   {'g', 'Telegram'},
   {'i', 'Polymail'},
   {'m', 'Sublime Text'},
   {'n', 'iTerm2'},
-  {'o', 'Todoist'},
+  {'o', 'com.culturedcode.ThingsMac', true},
   {'p', 'Spotify'},
   {'r', 'Google Chrome'},
   {'t', 'Google Translate'},
   {'u', 'Slack'},
   {'w', 'Bear'},
+  {'x', 'Messages'},
   {'y', 'WhatsApp'},
 }
 
 for i, app in ipairs(apps) do
   launchApplication = function()
-    hs.application.launchOrFocus(app[2])
+    -- Third argument is if we need to go by Bundle ID. Some apps seem to only work by targeting the Bundle ID instead
+    if app[3] then
+      hs.application.launchOrFocusByBundleID(app[2])
+    else
+      hs.application.launchOrFocus(app[2])
+    end
+
     k.triggered = true
   end
 
@@ -155,11 +165,17 @@ hs.fnutils.each({
   { modifiers={'cmd'}, key='k', direction='Up' },
   { modifiers={'cmd'}, key='l', direction='Right' },
 
-  -- shift + cmd + arrow key movement
-  { modifiers={'shift', 'cmd'}, key='h', direction='Left' },
-  { modifiers={'shift', 'cmd'}, key='j', direction='Down' },
-  { modifiers={'shift', 'cmd'}, key='k', direction='Up' },
-  { modifiers={'shift', 'cmd'}, key='l', direction='Right' }
+  -- cmd + shift + arrow key movement
+  { modifiers={'cmd', 'shift'}, key='h', direction='Left' },
+  { modifiers={'cmd', 'shift'}, key='j', direction='Down' },
+  { modifiers={'cmd', 'shift'}, key='k', direction='Up' },
+  { modifiers={'cmd', 'shift'}, key='l', direction='Right' },
+
+  -- ctrl + shift + arrow key movement
+  { modifiers={'ctrl', 'shift'}, key='h', direction='Left' },
+  { modifiers={'ctrl', 'shift'}, key='j', direction='Down' },
+  { modifiers={'ctrl', 'shift'}, key='k', direction='Up' },
+  { modifiers={'ctrl', 'shift'}, key='l', direction='Right' }
 }, function(config)
   k:bind(config.modifiers, config.key,
     function() fastKeyStroke(config.modifiers, config.direction) end,
