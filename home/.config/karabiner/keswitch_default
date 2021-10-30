@@ -1,5 +1,0 @@
-#!/bin/bash
-
-~/.config/karabiner/keswitch Default
-
-exit 0
