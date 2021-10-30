@@ -1,0 +1,4 @@
+# Add homebrew to PATH for Apple Silicon
+if [ -s "/opt/homebrew/bin" ]; then
+  export PATH=/opt/homebrew/bin:$PATH
+fi

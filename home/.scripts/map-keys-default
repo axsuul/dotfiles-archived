@@ -1,0 +1,17 @@
+#!/bin/bash
+
+# Use https://hidutil-generator.netlify.app to help generate these mappings
+#
+# The following mappings correspond to:
+# 1. caps_lock -> f18
+hidutil property --set \
+'{
+  "UserKeyMapping": [
+    {
+      "HIDKeyboardModifierMappingSrc": 0x700000039,
+      "HIDKeyboardModifierMappingDst": 0x70000006D
+    }
+  ]
+}'
+
+exit 0

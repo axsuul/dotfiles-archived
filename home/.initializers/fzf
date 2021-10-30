@@ -1,7 +1,7 @@
 # Enable case-insensitive search
 export FZF_CTRL_R_OPTS="-i"
 
-# Ensure these files are installed (e.g. $(brew --prefix)/opt/fzf/install)
+# Ensure these files are also installed (e.g. $(brew --prefix)/opt/fzf/install)
 if [ -n "$ZSH_VERSION" ]; then
   [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 elif [ -n "$BASH_VERSION" ]; then

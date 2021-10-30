@@ -1,0 +1,37 @@
+#!/bin/bash
+
+# Use https://hidutil-generator.netlify.app to help generate these mappings
+#
+# The following mappings correspond to:
+# 1. caps_lock -> f18
+# 2. left_option -> left_command
+# 3. left_command -> left_option
+# 4. right_option -> right_command
+# 5. right_command -> right_option
+hidutil property --set \
+'{
+  "UserKeyMapping": [
+    {
+      "HIDKeyboardModifierMappingSrc": 0x700000039,
+      "HIDKeyboardModifierMappingDst": 0x70000006D
+    },
+    {
+      "HIDKeyboardModifierMappingSrc": 0x7000000E2,
+      "HIDKeyboardModifierMappingDst": 0x7000000E3
+    },
+    {
+      "HIDKeyboardModifierMappingSrc": 0x7000000E3,
+      "HIDKeyboardModifierMappingDst": 0x7000000E2
+    },
+    {
+      "HIDKeyboardModifierMappingSrc": 0x7000000E6,
+      "HIDKeyboardModifierMappingDst": 0x7000000E7
+    },
+    {
+      "HIDKeyboardModifierMappingSrc": 0x7000000E7,
+      "HIDKeyboardModifierMappingDst": 0x7000000E6
+    }
+  ]
+}'
+
+exit 0
