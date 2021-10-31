@@ -1,7 +1,8 @@
 #!/bin/bash
 
-# Map keys natively with hidutil so we don't have to use Karabiner Elements which always breaks for us. Use
-# https://hidutil-generator.netlify.app to help generate these mappings
+# This script is intended to be called by ControlPlane when in "Default" context. It maps keys natively with hidutil so
+# we don't have to use Karabiner Elements which always breaks for us. Use https://hidutil-generator.netlify.app to help
+# generate these mappings
 #
 # The following mappings correspond to:
 # 1. caps_lock -> f18
