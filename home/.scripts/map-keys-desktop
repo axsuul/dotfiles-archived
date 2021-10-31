@@ -9,6 +9,12 @@
 # 3. left_command -> left_option
 # 4. right_option -> right_command
 # 5. right_command -> right_option
+# 6. f7 -> rewind
+# 7. f8 -> play_or_pause
+# 8. f9 -> fast_forward
+# 9. f10 -> mute
+# 10. f11 -> volume_decrement
+# 11. f12 -> volume_increment
 hidutil property --set \
 '{
   "UserKeyMapping": [
@@ -31,8 +37,32 @@ hidutil property --set \
     {
       "HIDKeyboardModifierMappingSrc": 0x7000000E7,
       "HIDKeyboardModifierMappingDst": 0x7000000E6
+    },
+    {
+      "HIDKeyboardModifierMappingSrc": 0x700000040,
+      "HIDKeyboardModifierMappingDst": 0xC000000B4
+    },
+    {
+      "HIDKeyboardModifierMappingSrc": 0x700000041,
+      "HIDKeyboardModifierMappingDst": 0xC000000CD
+    },
+    {
+      "HIDKeyboardModifierMappingSrc": 0x700000042,
+      "HIDKeyboardModifierMappingDst": 0xC000000B3
+    },
+    {
+      "HIDKeyboardModifierMappingSrc": 0x700000043,
+      "HIDKeyboardModifierMappingDst": 0xC000000E2
+    },
+    {
+      "HIDKeyboardModifierMappingSrc": 0x700000044,
+      "HIDKeyboardModifierMappingDst": 0xC000000EA
+    },
+    {
+      "HIDKeyboardModifierMappingSrc": 0x700000045,
+      "HIDKeyboardModifierMappingDst": 0xC000000E9
     }
-  ]
+]
 }'
 
 exit 0

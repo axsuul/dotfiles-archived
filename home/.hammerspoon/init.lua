@@ -4,6 +4,7 @@ hyper = {'cmd', 'ctrl', 'shift', 'alt'}
 
 -- Enter Hyper Mode when F18 (Hyper/Capslock) is pressed
 pressedF18 = function()
+  print('F18 Pressed')
   k.triggered = false
   k.modifier = false
   k:enter()
@@ -79,7 +80,7 @@ apps = {
   {'g', 'Telegram'},
   {'i', 'Polymail'},
   {'m', 'Sublime Text'},
-  {'n', 'iTerm2'},
+  {'n', 'iTerm'},
   {'o', 'com.culturedcode.ThingsMac', true},
   {'p', 'Spotify'},
   {'r', 'Google Chrome'},
