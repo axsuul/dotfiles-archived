@@ -1,77 +1,90 @@
--- A global variable for the Hyper Mode
-k = hs.hotkey.modal.new({}, "F17")
-hyper = {'cmd', 'ctrl', 'shift', 'alt'}
+-- Set global variable for hyper mode
+k = hs.hotkey.modal.new({}, 'F17')
 
--- Enter Hyper Mode when F18 (Hyper/Capslock) is pressed
-pressedF18 = function()
-  print('F18 Pressed')
-  k.triggered = false
-  k.modifier = false
-  k:enter()
+hyperModifierKey = {'cmd', 'ctrl', 'shift', 'alt'}
 
-  trigger_modifier = function()
-    k.modifier = true
+reloadConfig = function(files)
+  isConfigReloaded = false
+
+  for _,file in pairs(files) do
+    if file:sub(-4) == '.lua' then
+      isConfigReloaded = true
+    end
   end
 
-  -- Only trigger as modifier if held longer than thisj
-  hs.timer.doAfter(0.25, trigger_modifier)
-  -- hs.alert.show('in')
+  if isConfigReloaded then
+    hs.reload()
+
+    print('Config reloaded')
+  end
+end
+
+enterHyperMode = function()
+  print('Hyper mode: entered')
+
+  k.isEntered = false
+  k.actsAsModifier = false
+  k:enter()
+
+  triggerHyperModeActsAsModifier = function()
+    k.actsAsModifier = true
+  end
+
+  -- Only trigger as modifier if held longer than this amount of time
+  hs.timer.doAfter(0.25, triggerHyperModeActsAsModifier)
 end
 
 -- https://github.com/Hammerspoon/hammerspoon/issues/1011#issuecomment-261114434
 -- Necessary to define a new function to get faster key strokes for repeating
-fastKeyStroke = function(modifiers, key)
+triggerFastKeyStroke = function(modifiers, key)
   local event = require("hs.eventtap").event
   event.newKeyEvent(modifiers, string.lower(key), true):post()
   event.newKeyEvent(modifiers, string.lower(key), false):post()
 
-  k.triggered = true
+  k.isEntered = true
 end
 
--- Passthrough
-passthrough_definitions = {
+-- Hyper modifier bindings which trigger as hyper (cmd+ctrl+shift+alt) + key
+hyperModifierBindings = {
   -- 1Password
-  {hyper, '1'},
+  {hyperModifierKey, '1'},
 
   -- Alfred
-  {hyper, 'v'},
+  {hyperModifierKey, 'v'},
 
   -- Fantastical
-  {hyper, 'c'},
+  {hyperModifierKey, 'c'},
 
   -- macOS Sidebar
-  {hyper, '\\'},
+  {hyperModifierKey, '\\'},
 
   -- Moom
-  {hyper, 'a'},
-  {hyper, 's'},
-  {hyper, 'd'},
-  {hyper, 'tab'},
-  {hyper, '9'},
-  {hyper, '0'},
+  {hyperModifierKey, 'a'},
+  {hyperModifierKey, 's'},
+  {hyperModifierKey, 'd'},
+  {hyperModifierKey, 'tab'},
+  {hyperModifierKey, '9'},
+  {hyperModifierKey, '0'},
 
   -- Alfred
-  {hyper, 'space'},
+  {hyperModifierKey, 'space'},
 }
 
-for i, definition in pairs(passthrough_definitions) do
+for i, binding in pairs(hyperModifierBindings) do
   -- Note that Lua copies by reference so assigning variable doesn't work
-  -- modifier is definition[1]
-  -- key is definition[2]
+  -- modifier is binding[1]
+  -- key is binding[2]
+  triggerHyperBindings = function()
+    print('Triggering passthrough: hyper + ' .. binding[2])
 
-  passthrough = function()
-    print('Triggering passthrough: hyper + ' .. definition[2])
-
-    fastKeyStroke(definition[1], definition[2])
-    -- k.triggered = true
+    triggerFastKeyStroke(binding[1], binding[2])
   end
 
-  -- Uncomment line below when binding new
-  k:bind({}, definition[2], passthrough, nil, nil)
+  k:bind({}, binding[2], triggerHyperBindings, nil, nil)
 end
 
--- Applications
-apps = {
+-- For launching/showing applications based on hyper mode key bindings
+hyperModeApplicationBindings = {
   {';', 'Discord'},
   {'/', 'Intercom'},
   {'b', 'Safari'},
@@ -91,42 +104,20 @@ apps = {
   {'y', 'WhatsApp'},
 }
 
-for i, app in ipairs(apps) do
+for i, binding in ipairs(hyperModeApplicationBindings) do
   launchApplication = function()
     -- Third argument is if we need to go by Bundle ID. Some apps seem to only work by targeting the Bundle ID instead
-    if app[3] then
-      hs.application.launchOrFocusByBundleID(app[2])
+    if binding[3] then
+      hs.application.launchOrFocusByBundleID(binding[2])
     else
-      hs.application.launchOrFocus(app[2])
+      hs.application.launchOrFocus(binding[2])
     end
 
-    k.triggered = true
+    k.isEntered = true
   end
 
-  k:bind({}, app[1], launchApplication, nil, nil)
+  k:bind({}, binding[1], launchApplication, nil, nil)
 end
-
--- function onAppLaunched(appName, eventType, app)
---   if eventType == hs.application.watcher.launched then
---     if appName == 'Firefox' then
---       browser = 'Firefox'
---       safariPid = app:pid()
-
---       print("Firefox launched, setting browser to Firefox with PID " .. safariPid)
---     end
---   elseif eventType == hs.application.watcher.terminated then
---     if app:pid() == safariPid then
---       browser = 'Google Chrome'
---       safariPid = nil
-
---       print("Application with PID " .. safariPid .. " matching Safari terminated, setting browser to Google Chrome")
---     end
---   end
--- end
-
--- Open specific browser depending on what's open
--- appWatcher = hs.application.watcher.new(onAppLaunched)
--- appWatcher:start()
 
 -- Arrow key bindings. Capslock must be held down first before the other modifiers for these to trigger
 hs.fnutils.each({
@@ -179,48 +170,36 @@ hs.fnutils.each({
   { modifiers={'ctrl', 'shift'}, key='l', direction='Right' }
 }, function(config)
   k:bind(config.modifiers, config.key,
-    function() fastKeyStroke(config.modifiers, config.direction) end,
+    function() triggerFastKeyStroke(config.modifiers, config.direction) end,
     nil,
-    function() fastKeyStroke(config.modifiers, config.direction) end
+    function() triggerFastKeyStroke(config.modifiers, config.direction) end
   )
 end)
 
--- k:bind({'shift'}, 'k', function() fastKeyStroke({'shift'}, 'Up') end, fastKeyStroke({'shift'}, 'Up'), nil)
--- Leave Hyper Mode when F18 (Hyper/Capslock) is pressed,
---   send ESCAPE if no other keys are pressed.
-releasedF18 = function()
+leaveHyperMode = function()
   k:exit()
 
-  if not k.triggered then
-    -- If hotkey held longer than this amount of time
-    -- let it remain as modifier and don't send ESCAPE
-    if not k.modifier then
+  if not k.isEntered then
+    if not k.actsAsModifier then
+      -- send ESCAPE key if not meant to act as modifier
       hs.eventtap.keyStroke({}, 'ESCAPE')
+
+      print('Hyper mode: acted as ESCAPE')
     else
-      print("Modifier detected")
+      print('Hyper mode: acted as modifier')
     end
   end
+
+  print('Hyper mode: left')
 end
 
--- Bind the Hyper key
-hs.hotkey.bind({}, 'F18', pressedF18, releasedF18)
+-- Enter hyper mode when F18 (should be mapped using hidutil) is pressed
+hs.hotkey.bind({}, 'F18', enterHyperMode, leaveHyperMode)
 
--- Bind so that modifiers can be pressed first before Hyper
--- key for combinations
-hs.hotkey.bind({'shift'}, 'F18', pressedF18, releasedF18)
-hs.hotkey.bind({'cmd'}, 'F18', pressedF18, releasedF18)
+-- Bind so that modifiers can also be pressed first before entering hyper mode for combinations (not sure if this works
+-- properly)
+hs.hotkey.bind({'shift'}, 'F18', enterHyperMode, leaveHyperMode)
+hs.hotkey.bind({'cmd'}, 'F18', enterHyperMode, leaveHyperMode)
 
 -- Reload config when any lua file in config directory changes
-function reloadConfig(files)
-    doReload = false
-    for _,file in pairs(files) do
-        if file:sub(-4) == '.lua' then
-            doReload = true
-        end
-    end
-    if doReload then
-        hs.reload()
-        print('reloaded')
-    end
-end
-local myWatcher = hs.pathwatcher.new(os.getenv('HOME') .. '/.hammerspoon/', reloadConfig):start()
+hs.pathwatcher.new(os.getenv('HOME') .. '/.hammerspoon/', reloadConfig):start()
