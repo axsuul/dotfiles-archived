@@ -1,0 +1,9 @@
+#!/bin/bash
+
+# Run this to undo all key mappings
+hidutil property --set \
+'{
+  "UserKeyMapping": []
+}'
+
+exit 0
