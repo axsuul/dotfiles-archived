@@ -1,6 +1,5 @@
 if [ -s "${HOME}/.rbenv" ]; then
   eval "$(rbenv init -)"
 
-  # Install gems to here so we don't run into permissions issues
-  export GEM_HOME=$HOME/.gem
+  # Note that we should never set GEM_HOME otherwise it will mess with rbenv shims
 fi
