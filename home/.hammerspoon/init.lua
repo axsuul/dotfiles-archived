@@ -1,7 +1,5 @@
 -- Set global variable for hyper mode
-k = hs.hotkey.modal.new({}, 'F17')
-
-hyperModifierKey = {'cmd', 'ctrl', 'shift', 'alt'}
+hyperMode = hs.hotkey.modal.new({}, 'F17')
 
 reloadConfig = function(files)
   isConfigReloaded = false
@@ -19,21 +17,6 @@ reloadConfig = function(files)
   end
 end
 
-enterHyperMode = function()
-  print('Hyper mode: entered')
-
-  k.isEntered = false
-  k.actsAsModifier = false
-  k:enter()
-
-  triggerHyperModeActsAsModifier = function()
-    k.actsAsModifier = true
-  end
-
-  -- Only trigger as modifier if held longer than this amount of time
-  hs.timer.doAfter(0.25, triggerHyperModeActsAsModifier)
-end
-
 -- https://github.com/Hammerspoon/hammerspoon/issues/1011#issuecomment-261114434
 -- Necessary to define a new function to get faster key strokes for repeating
 triggerFastKeyStroke = function(modifiers, key)
@@ -41,21 +24,55 @@ triggerFastKeyStroke = function(modifiers, key)
   event.newKeyEvent(modifiers, string.lower(key), true):post()
   event.newKeyEvent(modifiers, string.lower(key), false):post()
 
-  k.isEntered = true
+  hyperMode.isActive = true
 end
 
--- Hyper modifier bindings which trigger as hyper (cmd+ctrl+shift+alt) + key
+enterHyperMode = function()
+  print('Hyper mode: entered')
+
+  hyperMode.isActive = false
+  hyperMode.actsAsModifier = false
+  hyperMode:enter()
+
+  triggerHyperModeActsAsModifier = function()
+    hyperMode.actsAsModifier = true
+  end
+
+  -- Only trigger as modifier if held longer than this amount of time
+  hs.timer.doAfter(0.25, triggerHyperModeActsAsModifier)
+end
+
+leaveHyperMode = function()
+  hyperMode:exit()
+
+  if not hyperMode.isActive then
+    if not hyperMode.actsAsModifier then
+      -- send ESCAPE key if not meant to act as modifier
+      hs.eventtap.keyStroke({}, 'ESCAPE')
+
+      print('Hyper mode: acted as ESCAPE')
+    else
+      print('Hyper mode: acted as modifier')
+    end
+  end
+
+  print('Hyper mode: left')
+end
+
+-- Support hyper modifier bindings which trigger as cmd + ctrl + shift + alt + {key}
+hyperModifierKey = {'cmd', 'ctrl', 'shift', 'alt'}
 hyperModifierBindings = {
   -- 1Password
   {hyperModifierKey, '1'},
 
   -- Alfred
+  {hyperModifierKey, 'space'},
   {hyperModifierKey, 'v'},
 
   -- Fantastical
   {hyperModifierKey, 'c'},
 
-  -- macOS Sidebar
+  -- macOS Notification Center
   {hyperModifierKey, '\\'},
 
   -- Moom
@@ -65,9 +82,6 @@ hyperModifierBindings = {
   {hyperModifierKey, 'tab'},
   {hyperModifierKey, '9'},
   {hyperModifierKey, '0'},
-
-  -- Alfred
-  {hyperModifierKey, 'space'},
 }
 
 for i, binding in pairs(hyperModifierBindings) do
@@ -75,12 +89,12 @@ for i, binding in pairs(hyperModifierBindings) do
   -- modifier is binding[1]
   -- key is binding[2]
   triggerHyperBindings = function()
-    print('Triggering passthrough: hyper + ' .. binding[2])
+    print('Triggering hyper modifier + ' .. binding[2])
 
     triggerFastKeyStroke(binding[1], binding[2])
   end
 
-  k:bind({}, binding[2], triggerHyperBindings, nil, nil)
+  hyperMode:bind({}, binding[2], triggerHyperBindings, nil, nil)
 end
 
 -- For launching/showing applications based on hyper mode key bindings
@@ -113,10 +127,10 @@ for i, binding in ipairs(hyperModeApplicationBindings) do
       hs.application.launchOrFocus(binding[2])
     end
 
-    k.isEntered = true
+    hyperMode.isActive = true
   end
 
-  k:bind({}, binding[1], launchApplication, nil, nil)
+  hyperMode:bind({}, binding[1], launchApplication, nil, nil)
 end
 
 -- Arrow key bindings. Capslock must be held down first before the other modifiers for these to trigger
@@ -169,29 +183,12 @@ hs.fnutils.each({
   { modifiers={'ctrl', 'shift'}, key='k', direction='Up' },
   { modifiers={'ctrl', 'shift'}, key='l', direction='Right' }
 }, function(config)
-  k:bind(config.modifiers, config.key,
+  hyperMode:bind(config.modifiers, config.key,
     function() triggerFastKeyStroke(config.modifiers, config.direction) end,
     nil,
     function() triggerFastKeyStroke(config.modifiers, config.direction) end
   )
 end)
-
-leaveHyperMode = function()
-  k:exit()
-
-  if not k.isEntered then
-    if not k.actsAsModifier then
-      -- send ESCAPE key if not meant to act as modifier
-      hs.eventtap.keyStroke({}, 'ESCAPE')
-
-      print('Hyper mode: acted as ESCAPE')
-    else
-      print('Hyper mode: acted as modifier')
-    end
-  end
-
-  print('Hyper mode: left')
-end
 
 -- Enter hyper mode when F18 (should be mapped using hidutil) is pressed
 hs.hotkey.bind({}, 'F18', enterHyperMode, leaveHyperMode)
