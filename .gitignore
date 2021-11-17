@@ -2,6 +2,5 @@
 .svn
 *~
 .*.swp
-home/.config/karabiner/karabiner.json
 home/.config/nvim/.netrwhist
 home/.vim/*
