@@ -4,3 +4,6 @@
 .*.swp
 home/.config/nvim/.netrwhist
 home/.vim/*
+
+# Ignore karabiner non-config files
+home/.config/karabiner/automatic_backups
