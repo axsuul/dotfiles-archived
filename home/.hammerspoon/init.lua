@@ -17,12 +17,9 @@ reloadConfig = function(files)
   end
 end
 
--- https://github.com/Hammerspoon/hammerspoon/issues/1011#issuecomment-261114434
--- Necessary to define a new function to get faster key strokes for repeating
+-- Trigger a key stroke that can be repeated without delay
 triggerFastKeyStroke = function(modifiers, key)
-  local event = require("hs.eventtap").event
-  event.newKeyEvent(modifiers, string.lower(key), true):post()
-  event.newKeyEvent(modifiers, string.lower(key), false):post()
+  hs.eventtap.keyStroke(modifiers, string.lower(key), 0)
 
   hyperMode.isActive = true
 end
@@ -102,16 +99,16 @@ hyperModeApplicationBindings = {
   {';', 'Discord'},
   {'/', 'Intercom'},
   {'b', 'Safari'},
-  {'e', 'Evernote'},
+  {'e', 'Notes'},
   {'f', 'Finder'},
   {'g', 'Telegram'},
   {'i', 'Polymail'},
-  {'m', 'Sublime Text'},
+  {'m', 'Visual Studio Code'},
   {'n', 'iTerm'},
   {'o', 'com.culturedcode.ThingsMac', true},
   {'p', 'Spotify'},
   {'r', 'Google Chrome'},
-  {'t', 'Google Translate'},
+  {'t', 'DeepL'},
   {'u', 'Slack'},
   {'w', 'Bear'},
   {'x', 'Messages'},
@@ -120,6 +117,8 @@ hyperModeApplicationBindings = {
 
 for i, binding in ipairs(hyperModeApplicationBindings) do
   launchApplication = function()
+    print('Launching or focusing ' .. binding[2])
+
     -- Third argument is if we need to go by Bundle ID. Some apps seem to only work by targeting the Bundle ID instead
     if binding[3] then
       hs.application.launchOrFocusByBundleID(binding[2])
@@ -193,10 +192,11 @@ end)
 -- Enter hyper mode when F18 (should be mapped using hidutil) is pressed
 hs.hotkey.bind({}, 'F18', enterHyperMode, leaveHyperMode)
 
--- Bind so that modifiers can also be pressed first before entering hyper mode for combinations (not sure if this works
--- properly)
-hs.hotkey.bind({'shift'}, 'F18', enterHyperMode, leaveHyperMode)
+-- Bind so that modifiers can also be pressed first before entering hyper mode for combinations
 hs.hotkey.bind({'cmd'}, 'F18', enterHyperMode, leaveHyperMode)
+hs.hotkey.bind({'ctrl'}, 'F18', enterHyperMode, leaveHyperMode)
+hs.hotkey.bind({'option'}, 'F18', enterHyperMode, leaveHyperMode)
+hs.hotkey.bind({'shift'}, 'F18', enterHyperMode, leaveHyperMode)
 
 -- Reload config when any lua file in config directory changes
 hs.pathwatcher.new(os.getenv('HOME') .. '/.hammerspoon/', reloadConfig):start()
