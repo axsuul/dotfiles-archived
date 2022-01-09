@@ -103,7 +103,7 @@ hyperModeApplicationBindings = {
   {'f', 'Finder'},
   {'g', 'Telegram'},
   {'i', 'Polymail'},
-  {'m', 'Visual Studio Code'},
+  {'m', 'Sublime Text'},
   {'n', 'iTerm'},
   {'o', 'com.culturedcode.ThingsMac', true},
   {'p', 'Spotify'},
