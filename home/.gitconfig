@@ -5,5 +5,7 @@
   user = axsuul
 [core]
   excludesfile = ~/.gitignore_global
+[init]
+  defaultBranch = master
 [push]
   default = current
