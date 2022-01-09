@@ -24,7 +24,9 @@ alias gstst="git stash -- \$(git diff --staged --name-only)" # stash only staged
 alias gstp="git stash pop"
 
 # GitHub (gh cli)
+alias ghb="gh browse"
 alias ghpr="gh pr status"
+alias ghw="gh workflow view"
 
 # Ruby
 alias be="bundle exec"
