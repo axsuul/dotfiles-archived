@@ -1,0 +1,7 @@
+#!/bin/bash
+
+# Set display brightness to 90% when in Desktop context
+# Depends on https://github.com/nriley/brightness (make sure to install from source!)
+/usr/local/bin/brightness 0.9
+
+exit 0
