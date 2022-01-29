@@ -1,0 +1,13 @@
+# Load pure (ZSH prompt)
+# https://github.com/sindresorhus/pure
+if [ -s "$HOME/.zsh/pure" ]; then
+  fpath+=$HOME/.zsh/pure
+  autoload -U promptinit; promptinit
+  prompt pure
+
+  # Make git branch a lighter grey for better visiblity
+  zstyle :prompt:pure:git:branch color 244
+
+  # Add timestamp aligned to right
+  RPROMPT="%F{240}%D{%H:%M:%S}"
+fi
