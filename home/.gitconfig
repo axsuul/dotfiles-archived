@@ -5,6 +5,9 @@
   user = axsuul
 [core]
   excludesfile = ~/.gitignore_global
+
+  # Don't quit if doing git diff and everything can fit into one screen
+  pager = less -+X -+F
 [init]
   defaultBranch = master
 [push]
