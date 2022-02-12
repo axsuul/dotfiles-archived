@@ -1,3 +1,6 @@
+# Load common
+[[ -s "$HOME/.commonrc" ]] && source "$HOME/.commonrc"
+
 # Set to this to use case-sensitive completion
 # export CASE_SENSITIVE="true"
 
@@ -10,8 +13,8 @@ export DISABLE_AUTO_TITLE="true"
 # Uncomment following line if you want to disable colors in ls
 # export DISABLE_LS_COLORS="true"
 
-# Load common
-[[ -s "$HOME/.commonrc" ]] && source "$HOME/.commonrc"
+# Remove limits and deduplication of the history file
+setopt EXTENDED_HISTORY
 
 # Disable the annoying autocorrect feature
 # Must come after sourcing oh-my-zsh.sh

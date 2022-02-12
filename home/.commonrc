@@ -18,5 +18,10 @@ fi
 export VISUAL="subl -w"
 export EDITOR="$VISUAL"
 
+# Enable much larger command history
+export HISTFILESIZE=1000000000
+export HISTSIZE=$HISTFILESIZE
+export SAVEHIST=$HISTFILESIZE
+
 # Limits Syncthing CPU usage
 export GOMAXPROCS=1
