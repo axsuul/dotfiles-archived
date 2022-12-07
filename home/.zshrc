@@ -13,8 +13,19 @@ export DISABLE_AUTO_TITLE="true"
 # Uncomment following line if you want to disable colors in ls
 # export DISABLE_LS_COLORS="true"
 
-# Remove limits and deduplication of the history file
+# Stores start and elapsed time for each command in the history file
 setopt EXTENDED_HISTORY
+
+# Write new entries to the history incrementally instead only after shell exit. This is so we don't pollute a session's
+# history from other sessions since the context might be different
+setopt APPEND_HISTORY
+
+# Let multiple instances of ZSH share the same active history. This doesn't include bang expansions (!!, !$, etc...)
+# which will still use the local history
+setopt SHARE_HISTORY
+
+# Don't save duplicate history entries.
+setopt HIST_SAVE_NO_DUPS
 
 # Disable the annoying autocorrect feature
 # Must come after sourcing oh-my-zsh.sh
