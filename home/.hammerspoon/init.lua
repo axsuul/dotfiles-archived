@@ -62,6 +62,9 @@ hyperModifierBindings = {
   -- 1Password
   {hyperModifierKey, '1'},
 
+  -- Raycast
+  {hyperModifierKey, '2'},
+
   -- Alfred
   {hyperModifierKey, 'space'},
   {hyperModifierKey, 'v'},
@@ -97,18 +100,19 @@ end
 -- For launching/showing applications based on hyper mode key bindings
 hyperModeApplicationBindings = {
   {';', 'Discord'},
+  {'\'', 'Linear'},
   {'/', 'Intercom'},
   {'b', 'Safari'},
   {'e', 'Notes'},
   {'f', 'Finder'},
   {'g', 'Telegram'},
-  {'i', 'Polymail'},
+  {'i', 'Mail'},
   {'m', 'Sublime Text'},
   {'n', 'iTerm'},
   {'o', 'com.culturedcode.ThingsMac', true},
   {'p', 'Spotify'},
   {'r', 'Google Chrome'},
-  {'t', 'DeepL'},
+  {'t', 'Google Translate'},
   {'u', 'Slack'},
   {'w', 'Bear'},
   {'x', 'Messages'},
