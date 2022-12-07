@@ -8,14 +8,20 @@ alias dce="docker-compose exec"
 alias dcs="docker-compose stop"
 
 # Git
+alias gsha="git rev-parse HEAD | tr -d '\n' | pbcopy" # copy current git commit SHA1 to clipboard
 alias gac="git add -A && git commit" # commit all new and unchanged files
 alias gbs="git branch --sort=committerdate"
 alias gbc="git-copy-branch-name" # copy current branch name
+alias gcam="git commit --amend --message"
+alias gcob="git checkout -b"
+alias gcoi="git checkout -p"
 alias gcom="git checkout master"
 alias gcop="git checkout -" # checkout previous branch
+alias gcp="git cherry-pick"
 alias gdm="git diff master" # diff between current branch and master
 alias gdp="git diff @~..@" # diff between current commit and previous commit
 alias grbm="git rebase master"
+alias grbim="git rebase --interactive master"
 alias grbs="git rebase --skip"
 alias grsm="git reset --mixed"
 alias grsmp="git reset --mixed \$(git rev-parse @~)" # git reset (mixed) to previous commit
@@ -26,7 +32,11 @@ alias gstp="git stash pop"
 # GitHub (gh cli)
 alias ghb="gh browse"
 alias ghpr="gh pr status"
+alias ghprv="gh pr view --web"
+alias ghprb="ghprv"
+alias ghprc="gh pr create --title \$(git rev-parse --abbrev-ref HEAD) --fill" # creates pr with branch name as title
 alias ghw="gh workflow view"
+alias gpsrc="gps && ghprc" # pushes to remote branch and creates pr
 
 # Ruby
 alias be="bundle exec"

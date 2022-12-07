@@ -20,7 +20,11 @@ export EDITOR="$VISUAL"
 
 # Enable much larger command history
 export HISTFILESIZE=1000000000
+
+# The maximum number of history entries to keep alive in one session
 export HISTSIZE=$HISTFILESIZE
+
+# The maximum number of history entries to keep
 export SAVEHIST=$HISTFILESIZE
 
 # Limits Syncthing CPU usage
