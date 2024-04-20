@@ -1,4 +1,7 @@
-# dotfiles 
+# dotfiles (archived)
+
+> [!WARNING]
+> I've decided to make my dotfiles private going forward. Anything you see here is outdated but a good baseline for getting started on your own
 
 [Gotta have my dotfiles!](https://www.youtube.com/watch?v=Kt6JI9gzECo) Plays nicely with: 
 
